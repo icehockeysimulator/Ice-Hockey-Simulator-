@@ -1,0 +1,260 @@
+{
+    "teams": [
+        {
+            "name": "Anaheim",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 18.6,
+            "pk": 76.4
+        },
+        {
+            "name": "Boston",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 23.4,
+            "pk": 77.0
+        },
+        {
+            "name": "Buffalo",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 19.5,
+            "pk": 81.9
+        },
+        {
+            "name": "Calgary",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 16.2,
+            "pk": 80.4
+        },
+        {
+            "name": "Carolina",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 24.9,
+            "pk": 80.5
+        },
+        {
+            "name": "Chicago",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 16.9,
+            "pk": 83.6
+        },
+        {
+            "name": "Colorado",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 17.1,
+            "pk": 84.6
+        },
+        {
+            "name": "Columbus",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 18.9,
+            "pk": 76.0
+        },
+        {
+            "name": "Dallas",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 28.6,
+            "pk": 80.3
+        },
+        {
+            "name": "Detroit",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 22.6,
+            "pk": 77.1
+        },
+        {
+            "name": "Edmonton",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 30.6,
+            "pk": 77.8
+        },
+        {
+            "name": "Florida",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 19.5,
+            "pk": 81.0
+        },
+        {
+            "name": "Las Vegas",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 24.6,
+            "pk": 81.4
+        },
+        {
+            "name": "Long Island",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 16.5,
+            "pk": 80.8
+        },
+        {
+            "name": "Los Angeles",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 17.0,
+            "pk": 74.6
+        },
+        {
+            "name": "Minnesota",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 25.2,
+            "pk": 79.8
+        },
+        {
+            "name": "Montreal",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 23.1,
+            "pk": 78.2
+        },
+        {
+            "name": "Nashville",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 23.1,
+            "pk": 81.7
+        },
+        {
+            "name": "New Jersey",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 22.0,
+            "pk": 79.3
+        },
+        {
+            "name": "New York",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 24.7,
+            "pk": 79.9
+        },
+        {
+            "name": "Ottawa",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 24.0,
+            "pk": 75.7
+        },
+        {
+            "name": "Philadelphia",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 15.7,
+            "pk": 77.6
+        },
+        {
+            "name": "Pittsburgh",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 24.1,
+            "pk": 81.4
+        },
+        {
+            "name": "San Jose",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 21.2,
+            "pk": 76.4
+        },
+        {
+            "name": "Seattle",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 19.5,
+            "pk": 72.2
+        },
+        {
+            "name": "St. Louis",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 17.6,
+            "pk": 76.7
+        },
+        {
+            "name": "Tampa",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 20.7,
+            "pk": 82.6
+        },
+        {
+            "name": "Toronto",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 21.3,
+            "pk": 81.2
+        },
+        {
+            "name": "Utah",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 20.0,
+            "pk": 78.1
+        },
+        {
+            "name": "Vancouver",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 21.8,
+            "pk": 71.5
+        },
+        {
+            "name": "Washington",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 17.8,
+            "pk": 80.1
+        },
+        {
+            "name": "Winnipeg",
+            "abbreviation": "",
+            "leagueName": "Estados Unidos e Canadá",
+            "gkSv": 0,
+            "pp": 18.5,
+            "pk": 77.6
+        }
+    ]
+}
