@@ -654,6 +654,34 @@
       "isOT": true
     },
     {
+      "date": "2026-10-14",
+      "league": "Estados Unidos e Canadá",
+      "leagueId": 1,
+      "homeTeamName": "Washington",
+      "homeTeamId": 27,
+      "homeTeamAbbr": "",
+      "awayTeamName": "Montreal",
+      "awayTeamId": 25,
+      "awayTeamAbbr": "",
+      "homeGoals": 5,
+      "awayGoals": 4,
+      "isOT": false
+    },
+    {
+      "date": "2026-10-14",
+      "league": "Estados Unidos e Canadá",
+      "leagueId": 1,
+      "homeTeamName": "Colorado",
+      "homeTeamId": 7,
+      "homeTeamAbbr": "",
+      "awayTeamName": "Dallas",
+      "awayTeamId": 22,
+      "awayTeamAbbr": "",
+      "homeGoals": 2,
+      "awayGoals": 3,
+      "isOT": true
+    },
+    {
       "date": "2026-10-13",
       "league": "Estados Unidos e Canadá",
       "leagueId": 1,
