@@ -511,7 +511,7 @@
             "awayTeamAbbr": "SJS",
             "homeGoals": 3,
             "awayGoals": 4,
-            "isOT": false
+            "isOT":true
         },
         {
             "date": "2026-10-20",
@@ -595,7 +595,7 @@
             "awayTeamAbbr": "BOS",
             "homeGoals": 3,
             "awayGoals": 2,
-            "isOT": false
+            "isOT":true
         },
         {
             "date": "2026-10-20",
@@ -609,7 +609,7 @@
             "awayTeamAbbr": "MIN",
             "homeGoals": 4,
             "awayGoals": 3,
-            "isOT": false
+            "isOT":true
         },
         {
             "date": "2026-10-20",
@@ -623,7 +623,7 @@
             "awayTeamAbbr": "DET",
             "homeGoals": 4,
             "awayGoals": 3,
-            "isOT": false
+            "isOT":true
         },
         {
             "date": "2026-10-20",
