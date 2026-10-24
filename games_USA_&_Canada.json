@@ -500,6 +500,34 @@
     ],
     "games": [
         {
+            "date": "2026-10-23",
+            "league": "Estados Unidos e Canadá",
+            "leagueId": 1,
+            "homeTeamName": "Chicago",
+            "homeTeamId": 0,
+            "homeTeamAbbr": "CHI",
+            "awayTeamName": "Montreal",
+            "awayTeamId": 0,
+            "awayTeamAbbr": "MTL",
+            "homeGoals": 1,
+            "awayGoals": 4,
+            "isOT": false
+        },
+        {
+            "date": "2026-10-23",
+            "league": "Estados Unidos e Canadá",
+            "leagueId": 1,
+            "homeTeamName": "Colorado",
+            "homeTeamId": 0,
+            "homeTeamAbbr": "COL",
+            "awayTeamName": "Tampa",
+            "awayTeamId": 0,
+            "awayTeamAbbr": "TBL",
+            "homeGoals": 6,
+            "awayGoals": 3,
+            "isOT": false
+        },
+        {
             "date": "2026-10-22",
             "league": "Estados Unidos e Canadá",
             "leagueId": 1,
@@ -18837,34 +18865,6 @@
             "awayTeamAbbr": "",
             "homeGoals": 5,
             "awayGoals": 2,
-            "isOT": false
-        },
-        {
-            "date": "2025-10-30",
-            "league": "Estados Unidos e Canadá",
-            "leagueId": 1,
-            "homeTeamName": "St. Louis",
-            "homeTeamId": 2,
-            "homeTeamAbbr": "",
-            "awayTeamName": "Vancouver",
-            "awayTeamId": 6,
-            "awayTeamAbbr": "",
-            "homeGoals": 3,
-            "awayGoals": 4,
-            "isOT": true
-        },
-        {
-            "date": "2025-10-29",
-            "league": "Estados Unidos e Canadá",
-            "leagueId": 1,
-            "homeTeamName": "Columbus",
-            "homeTeamId": 26,
-            "homeTeamAbbr": "",
-            "awayTeamName": "Toronto",
-            "awayTeamId": 14,
-            "awayTeamAbbr": "",
-            "homeGoals": 6,
-            "awayGoals": 3,
             "isOT": false
         }
     ]
