@@ -14,7 +14,7 @@
         "otDrawConversion": 0.26,
         "dynamicThreshold": 160,
         "shrinkageK": 15,
-        "halfLifeGames": 20,
+        "halfLifeGames": 15,
         "formGames": 10
     },
     "teams": [
