@@ -15,7 +15,6 @@
         "dynamicThreshold": 160,
         "shrinkageK": 15,
         "halfLifeGames": 20
-        "formGames": 10
     },
     "teams": [
         {
