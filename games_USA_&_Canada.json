@@ -5,16 +5,17 @@
         "leagueId": 1,
         "leagueName": "Estados Unidos e Canadá",
         "isDynamicAllowed": true,
-        "formImpact": 0.2,
+        "formImpact": 0.20,
         "leagueAvgFallback": 3.08,
         "rho": 0.15,
-        "specialTeamsWeight": 0.8,
+        "specialTeamsWeight": 0.80,
         "shotsPerGame": 27.6,
         "ppOpportunities": 2.88,
         "otDrawConversion": 0.26,
         "dynamicThreshold": 160,
         "shrinkageK": 15,
-        "halfLifeGames": 15
+        "halfLifeGames": 20,
+        "formGames": 10
     },
     "teams": [
         {
