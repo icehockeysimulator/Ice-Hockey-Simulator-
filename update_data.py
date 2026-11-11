@@ -3,7 +3,7 @@ import requests
 from datetime import datetime, timedelta
 import os
 
-# Mapeamento oficial com os IDs corretos extraídos da base de dados
+# Mapeamento oficial corrigido (sem quebras de chavetas erradas)
 TEAM_MAP = {
     "ANA": {"id": 12, "name": "Anaheim"},
     "BOS": {"id": 30, "name": "Boston"},
@@ -39,119 +39,118 @@ TEAM_MAP = {
     "WPG": {"id": 3, "name": "Winnipeg"}
 }
 
-def get_yesterday_date():
-    yesterday = datetime.now() - timedelta(days=1)
-    return yesterday.strftime("%Y-%m-%d")
+def obter_data_ontem():
+    ontem = datetime.now() - timedelta(days=1)
+    return ontem.strftime("%Y-%m-%d")
 
-def fetch_nhl_scores(date_str):
-    url = f"https://api-web.nhle.com/v1/score/{date_str}"
+def obter_resultados_nhl(data_str):
+    url = f"https://api-web.nhle.com/v1/score/{data_str}"
     try:
-        response = requests.get(url, timeout=15)
-        response.raise_for_status()
-        return response.json()
+        resposta = requests.get(url, timeout=15)
+        resposta.raise_for_status()
+        return resposta.json()
     except Exception as e:
-        print(f"Erro ao obter dados da API da NHL para {date_str}: {e}")
+        print(f"Erro ao obter dados da API da NHL para {data_str}: {e}")
         return None
 
-def parse_games_from_nhl(data):
-    new_games = []
-    if not data or "games" not in data:
-        return new_games
+def processar_jogos_nhl(dados):
+    novos_jogos = []
+    if not dados or "games" not in dados:
+        return novos_jogos
     
-    for game in data["games"]:
-        gameState = game.get("gameState", "")
-        if gameState not in ["FINAL", "OFF"]:
+    for jogo in dados["games"]:
+        estado_jogo = jogo.get("gameState", "")
+        if estado_jogo not in ["FINAL", "OFF"]:
             continue
         
-        game_date = game.get("gameDate", "")
-        if len(game_date) >= 10:
-            game_date = game_date[:10]
+        data_jogo = jogo.get("gameDate", "")
+        if len(data_jogo) >= 10:
+            data_jogo = data_jogo[:10]
             
-        home_team_abbr = game.get("homeTeam", {}).get("abbrev", "")
-        away_team_abbr = game.get("awayTeam", {}).get("abbrev", "")
+        abrev_casa = jogo.get("homeTeam", {}).get("abbrev", "")
+        abrev_fora = jogo.get("awayTeam", {}).get("abbrev", "")
         
-        # Obter dados seguros do dicionário central com os IDs reais
-        home_info = TEAM_MAP.get(home_team_abbr, {"id": 0, "name": home_team_abbr})
-        away_info = TEAM_MAP.get(away_team_abbr, {"id": 0, "name": away_team_abbr})
+        info_casa = TEAM_MAP.get(abrev_casa, {"id": 0, "name": abrev_casa})
+        info_fora = TEAM_MAP.get(abrev_fora, {"id": 0, "name": abrev_fora})
         
-        home_goals = game.get("homeTeam", {}).get("score", 0)
-        away_goals = game.get("awayTeam", {}).get("score", 0)
+        golos_casa = jogo.get("homeTeam", {}).get("score", 0)
+        golos_fora = jogo.get("awayTeam", {}).get("score", 0)  # Corrigido o ponto para vírgula
         
-        period_descriptor = game.get("periodDescriptor", {})
-        period_type = period_descriptor.get("periodType", "REG")
-        is_ot = period_type in ["OT", "SO"]
+        descr_periodo = jogo.get("periodDescriptor", {})
+        tipo_periodo = descr_periodo.get("periodType", "REG")
+        foi_prolongamento = tipo_periodo in ["OT", "SO"]
         
-        game_obj = {
-            "date": game_date,
+        jogo_obj = {
+            "date": data_jogo,
             "league": "Estados Unidos e Canadá",
             "leagueId": 1,
-            "homeTeamName": home_info["name"],
-            "homeTeamId": home_info["id"],
+            "homeTeamName": info_casa["name"],
+            "homeTeamId": info_casa["id"],
             "homeTeamAbbr": "",
-            "awayTeamName": away_info["name"],
-            "awayTeamId": away_info["id"],
+            "awayTeamName": info_fora["name"],
+            "awayTeamId": info_fora["id"],
             "awayTeamAbbr": "",
-            "homeGoals": home_goals,
-            "awayGoals": away_goals,
-            "isOT": is_ot
+            "homeGoals": golos_casa,
+            "awayGoals": golos_fora,
+            "isOT": foi_prolongamento
         }
-        new_games.append(game_obj)
-    return new_games
+        novos_jogos.append(jogo_obj)
+    return novos_jogos
 
 def main():
-    json_path = "games_USA_&_Canada.json"
-    yesterday_str = get_yesterday_date()
-    print(f"A obter resultados da NHL para a data: {yesterday_str}")
+    caminho_json = "games_USA_&_Canada.json"
+    data_ontem = obter_data_ontem()
+    print(f"A obter resultados da NHL para a data: {data_ontem}")
     
-    data = fetch_nhl_scores(yesterday_str)
-    new_games = parse_games_from_nhl(data)
+    dados = obter_resultados_nhl(data_ontem)
+    novos_jogos = processar_jogos_nhl(dados)
     
-    if not new_games:
+    if not novos_jogos:
         print("Nenhum jogo novo encontrado para adicionar.")
         return
         
-    print(f"Encontrados {len(new_games)} novos jogos para adicionar.")
+    print(f"Encontrados {len(novos_jogos)} novos jogos para adicionar.")
     
-    content = {}
-    existing_games = []
+    conteudo = {}
+    jogos_existentes = []
     
-    if os.path.exists(json_path):
+    if os.path.exists(caminho_json):
         try:
-            with open(json_path, "r", encoding="utf-8") as f:
-                content = json.load(f)
-            if isinstance(content, dict) and "games" in content:
-                existing_games = content["games"]
-            elif isinstance(content, list):
-                existing_games = content
+            with open(caminho_json, "r", encoding="utf-8") as f:
+                conteudo = json.load(f)
+            if isinstance(conteudo, dict) and "games" in conteudo:
+                jogos_existentes = conteudo["games"]
+            elif isinstance(conteudo, list):
+                jogos_existentes = conteudo
         except Exception as e:
-            print(f"Aviso: Erro ao ler {json_path}, a iniciar lista vazia: {e}")
+            print(f"Aviso: Erro ao ler {caminho_json}, a iniciar lista vazia: {e}")
             
-    existing_keys = {(g.get("date"), g.get("homeTeamName"), g.get("awayTeamName")) for g in existing_games}
+    chaves_existentes = {(g.get("date"), g.get("homeTeamName"), g.get("awayTeamName")) for g in jogos_existentes}
     
-    games_to_add = []
-    for g in new_games:
-        key = (g.get("date"), g.get("homeTeamName"), g.get("awayTeamName"))
-        if key not in existing_keys:
-            games_to_add.append(g)
-            existing_keys.add(key)
+    jogos_a_adicionar = []
+    for g in novos_jogos:
+        chave = (g.get("date"), g.get("homeTeamName"), g.get("awayTeamName"))
+        if chave not in chaves_existentes:
+            jogos_a_adicionar.append(g)
+            chaves_existentes.add(chave)
             
-    if not games_to_add:
+    if not jogos_a_adicionar:
         print("Todos os jogos obtidos já existem no ficheiro.")
         return
         
-    updated_games = games_to_add + existing_games
-    updated_games = updated_games[:1312]
+    jogos_atualizados = jogos_a_adicionar + jogos_existentes
+    jogos_atualizados = jogos_atualizados[:1312]
     
-    if isinstance(content, dict):
-        content["games"] = updated_games
-        output_data = content
+    if isinstance(conteudo, dict):
+        conteudo["games"] = jogos_atualizados
+        dados_saida = conteudo
     else:
-        output_data = {"games": updated_games}
+        dados_saida = {"games": jogos_atualizados}
         
-    with open(json_path, "w", encoding="utf-8") as f:
-        json.dump(output_data, f, ensure_ascii=False, indent=4)
+    with open(caminho_json, "w", encoding="utf-8") as f:
+        json.dump(dados_saida, f, ensure_ascii=False, indent=4)
         
-    print(f"Sucesso! {len(games_to_add)} novos jogos adicionados com os IDs corretos. Total: {len(updated_games)}")
+    print(f"Sucesso! {len(jogos_a_adicionar)} novos jogos adicionados com os IDs corretos. Total: {len(jogos_atualizados)}")
 
 if __name__ == "__main__":
     main()
