@@ -3,40 +3,40 @@ import requests
 from datetime import datetime, timedelta
 import os
 
-# Mapeamento ajustado exatamente aos nomes das equipas utilizados no JSON da aplicação[span_13](start_span)[span_13](end_span)[span_14](start_span)[span_14](end_span)
-TEAM_NAME_MAP = {
-    "ANA": "Anaheim",
-    "BOS": "Boston",
-    "BUF": "Buffalo",
-    "CGY": "Calgary",
-    "CAR": "Carolina",
-    "CHI": "Chicago",
-    "COL": "Colorado",
-    "CBJ": "Columbus",
-    "DAL": "Dallas",
-    "DET": "Detroit",
-    "EDM": "Edmonton",
-    "FLA": "Florida",
-    "LAK": "Los Angeles",
-    "MIN": "Minnesota",
-    "MTL": "Montreal",
-    "NSH": "Nashville",
-    "NJD": "New Jersey",
-    "NYI": "Long Island",
-    "NYR": "New York",
-    "OTT": "Ottawa",
-    "PHI": "Philadelphia",
-    "PIT": "Pittsburgh",
-    "SJS": "San Jose",
-    "SEA": "Seattle",
-    "STL": "St. Louis",
-    "TBL": "Tampa",
-    "TOR": "Toronto",
-    "UTA": "Utah",
-    "VAN": "Vancouver",
-    "VGK": "Las Vegas",
-    "WSH": "Washington",
-    "WPG": "Winnipeg"
+# Mapeamento oficial com os IDs corretos extraídos da base de dados
+TEAM_MAP = {
+    "ANA": {"id": 12, "name": "Anaheim"},
+    "BOS": {"id": 30, "name": "Boston"},
+    "BUF": {"id": 21, "name": "Buffalo"},
+    "CGY": {"id": 9, "name": "Calgary"},
+    "CAR": {"id": 29, "name": "Carolina"},
+    "CHI": {"id": 20, "name": "Chicago"},
+    "COL": {"id": 7, "name": "Colorado"},
+    "CBJ": {"id": 26, "name": "Columbus"},
+    "DAL": {"id": 22, "name": "Dallas"},
+    "DET": {"id": 19, "name": "Detroit"},
+    "EDM": {"id": 5, "name": "Edmonton"},
+    "FLA": {"id": 18, "name": "Florida"},
+    "LAK": {"id": 10, "name": "Los Angeles"},
+    "MIN": {"id": 32, "name": "Minnesota"},
+    "MTL": {"id": 25, "name": "Montreal"},
+    "NSH": {"id": 11, "name": "Nashville"},
+    "NJD": {"id": 31, "name": "New Jersey"},
+    "NYI": {"id": 28, "name": "Long Island"},
+    "NYR": {"id": 16, "name": "New York"},
+    "OTT": {"id": 13, "name": "Ottawa"},
+    "PHI": {"id": 24, "name": "Philadelphia"},
+    "PIT": {"id": 23, "name": "Pittsburgh"},
+    "SJS": {"id": 4, "name": "San Jose"},
+    "SEA": {"id": 8, "name": "Seattle"},
+    "STL": {"id": 2, "name": "St. Louis"},
+    "TBL": {"id": 15, "name": "Tampa"},
+    "TOR": {"id": 14, "name": "Toronto"},
+    "UTA": {"id": 1, "name": "Utah"},
+    "VAN": {"id": 6, "name": "Vancouver"},
+    "VGK": {"id": 17, "name": "Las Vegas"},
+    "WSH": {"id": 27, "name": "Washington"},
+    "WPG": {"id": 3, "name": "Winnipeg"}
 }
 
 def get_yesterday_date():
@@ -57,6 +57,7 @@ def parse_games_from_nhl(data):
     new_games = []
     if not data or "games" not in data:
         return new_games
+    
     for game in data["games"]:
         gameState = game.get("gameState", "")
         if gameState not in ["FINAL", "OFF"]:
@@ -69,8 +70,9 @@ def parse_games_from_nhl(data):
         home_team_abbr = game.get("homeTeam", {}).get("abbrev", "")
         away_team_abbr = game.get("awayTeam", {}).get("abbrev", "")
         
-        home_team_name = TEAM_NAME_MAP.get(home_team_abbr, home_team_abbr)
-        away_team_name = TEAM_NAME_MAP.get(away_team_abbr, away_team_abbr)
+        # Obter dados seguros do dicionário central com os IDs reais
+        home_info = TEAM_MAP.get(home_team_abbr, {"id": 0, "name": home_team_abbr})
+        away_info = TEAM_MAP.get(away_team_abbr, {"id": 0, "name": away_team_abbr})
         
         home_goals = game.get("homeTeam", {}).get("score", 0)
         away_goals = game.get("awayTeam", {}).get("score", 0)
@@ -83,12 +85,12 @@ def parse_games_from_nhl(data):
             "date": game_date,
             "league": "Estados Unidos e Canadá",
             "leagueId": 1,
-            "homeTeamName": home_team_name,
-            "homeTeamId": 0,  # Será preenchido dinamicamente com base nos dados existentes
-            "homeTeamAbbr": home_team_abbr,
-            "awayTeamName": away_team_name,
-            "awayTeamId": 0,  # Será preenchido dinamicamente com base nos dados existentes
-            "awayTeamAbbr": away_team_abbr,
+            "homeTeamName": home_info["name"],
+            "homeTeamId": home_info["id"],
+            "homeTeamAbbr": "",
+            "awayTeamName": away_info["name"],
+            "awayTeamId": away_info["id"],
+            "awayTeamAbbr": "",
             "homeGoals": home_goals,
             "awayGoals": away_goals,
             "isOT": is_ot
@@ -124,36 +126,6 @@ def main():
         except Exception as e:
             print(f"Aviso: Erro ao ler {json_path}, a iniciar lista vazia: {e}")
             
-    # Criar um dicionário dinâmico de mapeamento de Nome -> ID com base nos jogos já existentes
-    team_id_map = {}
-    for g in existing_games:
-        h_name = g.get("homeTeamName")
-        h_id = g.get("homeTeamId")
-        if h_name and h_id and h_id != 0:
-            team_id_map[h_name] = h_id
-            
-        a_name = g.get("awayTeamName")
-        a_id = g.get("awayTeamId")
-        if a_name and a_id and a_id != 0:
-            team_id_map[a_name] = a_id
-
-    # Se o JSON contiver uma lista explícita de equipas, mapeia-a também
-    if isinstance(content, dict) and "teams" in content:
-        for t in content["teams"]:
-            t_name = t.get("name")
-            t_id = t.get("id")
-            if t_name and t_id:
-                team_id_map[t_name] = t_id
-
-    # Atribuir os IDs corretos aos novos jogos antes de os gravar
-    for g in new_games:
-        h_name = g["homeTeamName"]
-        a_name = g["awayTeamName"]
-        if g["homeTeamId"] == 0 and h_name in team_id_map:
-            g["homeTeamId"] = team_id_map[h_name]
-        if g["awayTeamId"] == 0 and a_name in team_id_map:
-            g["awayTeamId"] = team_id_map[a_name]
-
     existing_keys = {(g.get("date"), g.get("homeTeamName"), g.get("awayTeamName")) for g in existing_games}
     
     games_to_add = []
@@ -164,7 +136,7 @@ def main():
             existing_keys.add(key)
             
     if not games_to_add:
-        print("Todos os jogos obtidos já existem no games_USA_&_Canada.json.")
+        print("Todos os jogos obtidos já existem no ficheiro.")
         return
         
     updated_games = games_to_add + existing_games
@@ -179,7 +151,7 @@ def main():
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=4)
         
-    print(f"Sucesso! {len(games_to_add)} novos jogos adicionados. Total de jogos em {json_path}: {len(updated_games)}")
+    print(f"Sucesso! {len(games_to_add)} novos jogos adicionados com os IDs corretos. Total: {len(updated_games)}")
 
 if __name__ == "__main__":
     main()
