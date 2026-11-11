@@ -3,7 +3,6 @@ import requests
 from datetime import datetime, timedelta
 import os
 
-# Mapeamento oficial corrigido (sem quebras de chavetas erradas)
 TEAM_MAP = {
     "ANA": {"id": 12, "name": "Anaheim"},
     "BOS": {"id": 30, "name": "Boston"},
@@ -74,7 +73,7 @@ def processar_jogos_nhl(dados):
         info_fora = TEAM_MAP.get(abrev_fora, {"id": 0, "name": abrev_fora})
         
         golos_casa = jogo.get("homeTeam", {}).get("score", 0)
-        golos_fora = jogo.get("awayTeam", {}).get("score", 0)  # Corrigido o ponto para vírgula
+        golos_fora = jogo.get("awayTeam", {}).get("score", 0)
         
         descr_periodo = jogo.get("periodDescriptor", {})
         tipo_periodo = descr_periodo.get("periodType", "REG")
